@@ -1,56 +1,121 @@
-# Welcome to your Expo app 👋
+# React Native Memo Practice
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+React Native와 Expo를 활용하여 모바일 앱 개발을 학습하기 위한 개인 스터디 프로젝트입니다.
 
-## Get started
+간단한 메모 앱을 직접 구현하면서 React Native의 기본 UI 구성, 상태 관리, HTTP API 통신을 단계적으로 학습합니다.
 
-1. Install dependencies
+## 1. 개발 환경
 
-   ```bash
-   npm install
-   ```
+| 구분 | 기술 |
+|---|---|
+| OS | Windows 11 |
+| Framework | React Native |
+| Development Tool | Expo |
+| Language | TypeScript |
+| Editor | Visual Studio Code |
+| Node.js | 24.x |
+| Package Manager | npm |
+| HTTP Client | Fetch API |
+| Test Device | Android (Expo Go) |
 
-2. Start the app
+## 2. 주요 기능
 
-   ```bash
-   npx expo start
-   ```
+간단한 메모 앱의 CRUD 기능을 구현합니다.
 
-In the output, you'll find options to open the app in a
+- 메모 목록 조회
+- 메모 작성
+- 메모 수정
+- 메모 삭제
+- HTTP API 서버 연동
+- 로딩 및 오류 처리
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 3. 프로젝트 실행
 
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+### 패키지 설치
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+### 개발 서버 실행
 
-### Other setup steps
+```bash
+npm start
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+또는
 
-## Learn more
+```bash
+npx expo start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+### Android 실행
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+1. Android 스마트폰에 Expo Go 앱을 설치합니다.
+2. PC와 스마트폰을 동일한 Wi-Fi에 연결합니다.
+3. 개발 서버 실행 후 터미널에 표시된 QR 코드를 확인합니다.
+4. Expo Go에서 QR 코드를 스캔하여 앱을 실행합니다.
 
-## Join the community
+서로 다른 네트워크를 사용하는 경우 터널 모드로 실행할 수 있습니다.
 
-Join our community of developers creating universal apps.
+```bash
+npx expo start --tunnel
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 4. 스터디 계획
+
+| 단계 | 학습 내용 | 상태 |
+|---|---|---|
+| 1 | Expo 개발 환경 구성 및 Android 실행 | 진행 중 |
+| 2 | 기본 UI 컴포넌트 학습 | 예정 |
+| 3 | 메모 목록 화면 구현 | 예정 |
+| 4 | 메모 작성 및 삭제 | 예정 |
+| 5 | 메모 수정 기능 | 예정 |
+| 6 | HTTP API 연동 | 예정 |
+| 7 | 로딩 및 예외 처리 | 예정 |
+| 8 | 프로젝트 구조 정리 | 예정 |
+
+## 5. 학습할 주요 개념
+
+### React Native UI
+
+- View
+- Text
+- TextInput
+- Pressable
+- FlatList
+- StyleSheet
+
+### React Hooks
+
+- useState
+- useEffect
+
+### HTTP API
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | /memos | 메모 목록 조회 |
+| POST | /memos | 메모 작성 |
+| PUT | /memos/:id | 메모 수정 |
+| DELETE | /memos/:id | 메모 삭제 |
+
+API는 학습을 위한 예시이며, 추후 실제 서버와 연동할 예정입니다.
+
+## 6. 학습 방향
+
+- React Native의 기본 구조와 동작 원리 이해
+- 웹 React와 모바일 React Native의 차이점 학습
+- 복잡한 라이브러리보다 기본 API와 Hooks 우선 활용
+- 기능별 단계적 구현
+- Android 실기기를 통한 테스트
+
+## 7. 참고 자료
+
+- [React Native 공식 문서](https://reactnative.dev/)
+- [Expo 공식 문서](https://docs.expo.dev/)
+- [TypeScript 공식 문서](https://www.typescriptlang.org/)
+
+---
+
+개인 학습 및 React Native 개발 역량 향상을 위한 프로젝트입니다.
