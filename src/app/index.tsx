@@ -1,98 +1,98 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
-
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
-  return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
+import { useState } from 'react';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 
 export default function HomeScreen() {
+  // 사용자가 입력 중인 메모
+  const [memo, setMemo] = useState('');
+
+  // 저장 버튼을 눌렀을 때 표시할 메모
+  const [savedMemo, setSavedMemo] = useState('');
+
+  // 저장 버튼 이벤트
+  const handleSave = () => {
+    setSavedMemo(memo);
+    setMemo('');
+  };
+
   return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            이제 한번 해 봅시다!
-          </ThemedText>
-        </ThemedView>
+    <View style={styles.container}>
+      <Text style={styles.title}>
+        나의 메모장
+      </Text>
 
-        <ThemedText type="code" style={styles.code}>
-          즐거운 리액트 네이티브
-        </ThemedText>
+      <Text style={styles.description}>
+        React Native 첫 번째 실습
+      </Text>
 
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
+      <TextInput
+        style={styles.input}
+        placeholder="메모를 입력하세요"
+        value={memo}
+        onChangeText={setMemo}
+      />
 
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+      <Pressable
+        style={styles.button}
+        onPress={handleSave}
+      >
+        <Text style={styles.buttonText}>
+          메모 저장
+        </Text>
+      </Pressable>
+
+      <Text style={styles.result}>
+        {savedMemo || '작성한 메모가 여기에 표시됩니다.'}
+      </Text>
+    </View>
   );
 }
 
+// React Native 스타일 정의
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
-  },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
+    padding: 20,
+    paddingTop: 60,
+    backgroundColor: '#f5f5f5',
   },
   title: {
-    textAlign: 'center',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
-  code: {
-    textTransform: 'uppercase',
+  description: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 20,
   },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 12,
+    backgroundColor: '#fff',
+    marginBottom: 15,
+  },
+  button: {
+    backgroundColor: '#2563eb',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  result: {
+    marginTop: 25,
+    fontSize: 16,
   },
 });
