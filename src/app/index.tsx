@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import {
+  FlatList,
   Pressable,
   StyleSheet,
   Text,
@@ -8,28 +9,42 @@ import {
   View,
 } from 'react-native';
 
+// 메모 데이터 타입 정의
+type Memo = {
+  id: number;
+  content: string;
+};
+
 export default function HomeScreen() {
-  // 사용자가 입력 중인 메모
+  // 입력 중인 메모
   const [memo, setMemo] = useState('');
 
-  // 저장 버튼을 눌렀을 때 표시할 메모
-  const [savedMemo, setSavedMemo] = useState('');
+  // 메모 목록
+  const [memos, setMemos] = useState<Memo[]>([
+    { id: 1, content: 'React Native 공부하기' },
+    { id: 2, content: 'FlatList 이해하기' },
+    { id: 3, content: '메모 앱 만들기' },
+  ]);
 
-  // 저장 버튼 이벤트
+  // 메모 추가
   const handleSave = () => {
-    setSavedMemo(memo);
+    if (memo.trim() === '') return;
+
+    const newMemo: Memo = {
+      id: Date.now(),
+      content: memo.trim(),
+    };
+
+    // 기존 목록에 새 메모 추가
+    setMemos((prev) => [newMemo, ...prev]);
+
+    // 입력창 초기화
     setMemo('');
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        나의 메모장
-      </Text>
-
-      <Text style={styles.description}>
-        React Native 첫 번째 실습
-      </Text>
+      <Text style={styles.title}>나의 메모장</Text>
 
       <TextInput
         style={styles.input}
@@ -38,23 +53,31 @@ export default function HomeScreen() {
         onChangeText={setMemo}
       />
 
-      <Pressable
-        style={styles.button}
-        onPress={handleSave}
-      >
-        <Text style={styles.buttonText}>
-          메모 저장
-        </Text>
+      <Pressable style={styles.button} onPress={handleSave}>
+        <Text style={styles.buttonText}>메모 추가</Text>
       </Pressable>
 
-      <Text style={styles.result}>
-        {savedMemo || '작성한 메모가 여기에 표시됩니다.'}
+      <Text style={styles.count}>
+        전체 메모: {memos.length}개
       </Text>
+
+      {/* 리엑트의 map 처럼 데이터 배열 표현 FlatList */}
+      <FlatList
+        data={memos}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.memoItem}>
+            <Text>{item.content}</Text>
+          </View>
+        )}
+        ListEmptyComponent={
+          <Text>등록된 메모가 없습니다.</Text>
+        }
+      />
     </View>
   );
 }
 
-// React Native 스타일 정의
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -65,11 +88,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  description: {
-    fontSize: 14,
-    color: '#666',
     marginBottom: 20,
   },
   input: {
@@ -88,11 +106,18 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#fff',
-    fontSize: 16,
     fontWeight: 'bold',
   },
-  result: {
-    marginTop: 25,
-    fontSize: 16,
+  count: {
+    marginTop: 20,
+    marginBottom: 10,
+    fontSize: 14,
+    color: '#666',
+  },
+  memoItem: {
+    padding: 15,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    marginBottom: 10,
   },
 });
