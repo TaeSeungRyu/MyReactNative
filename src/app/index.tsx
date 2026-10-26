@@ -1,14 +1,17 @@
 
-import { Button } from 'expo-router/build/react-navigation';
+import * as Haptics from 'expo-haptics';
 import { useEffect, useState } from 'react';
 import {
+  Alert,
   FlatList,
+  Platform,
   Pressable,
   StyleSheet,
   Text,
   TextInput,
-  View,
+  View
 } from 'react-native';
+
 
 // 메모 데이터 타입 정의
 type Memo = {
@@ -41,24 +44,47 @@ export default function HomeScreen() {
 
     // 입력창 초기화
     setMemo('');
+
+    // 네이티브 기능 호출: 저장 성공 햅틱
+    Haptics.notificationAsync(
+      Haptics.NotificationFeedbackType.Success
+    );
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(memos); //나중에 뭐 콜백 이벤트..
   }, [memos])
 
-  const runConfirm =(item : Memo)=>{
-    console.log(item)
-    if(!confirm('삭제할꺼야?')) return;
-    const id = item.id;
-    setMemos((prev) => prev.filter((arg) => arg.id !== id));
 
-  }
+  const runConfirm = (item: Memo) => {
+    const handleDelete = () => {
+      setMemos((prev) => prev.filter((memo) => memo.id !== item.id));
+    };
 
+    // 웹 브라우저
+    if (Platform.OS === 'web') {
+      if (window.confirm('정말 삭제하시겠습니까?')) {
+        handleDelete();
+      }
+      return;
+    }
+
+    // Android / iOS
+    Alert.alert('메모 삭제', '정말 삭제하시겠습니까?', [
+      {
+        text: '취소',
+        style: 'cancel',
+      },
+      {
+        text: '삭제',
+        style: 'destructive',
+        onPress: handleDelete,
+      },
+    ]);
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>나의 메모장</Text>
-
       <TextInput
         style={styles.input}
         placeholder="메모를 입력하세요"
@@ -81,7 +107,6 @@ export default function HomeScreen() {
         renderItem={({ item }) => (
           <View style={styles.memoItem}>
             <Text>{item.content}</Text>
-            <Button onPress={() => runConfirm(item)}>x</Button>
             <Pressable
               onPress={() => runConfirm(item)}
               style={{
@@ -91,7 +116,7 @@ export default function HomeScreen() {
               }}
             >
               <Text style={{ color: '#fff' }}>삭제</Text>
-            </Pressable>            
+            </Pressable>
           </View>
         )}
         ListEmptyComponent={
@@ -144,8 +169,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 10,
     display: 'flex',
-    justifyContent : 'space-between',
-    flexDirection : 'row',
-    alignItems : 'center'
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center'
   },
 });
