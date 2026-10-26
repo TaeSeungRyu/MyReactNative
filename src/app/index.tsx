@@ -1,5 +1,6 @@
 
-import { useState } from 'react';
+import { Button } from 'expo-router/build/react-navigation';
+import { useEffect, useState } from 'react';
 import {
   FlatList,
   Pressable,
@@ -42,6 +43,18 @@ export default function HomeScreen() {
     setMemo('');
   };
 
+  useEffect(()=>{
+    console.log(memos); //나중에 뭐 콜백 이벤트..
+  }, [memos])
+
+  const runConfirm =(item : Memo)=>{
+    console.log(item)
+    if(!confirm('삭제할꺼야?')) return;
+    const id = item.id;
+    setMemos((prev) => prev.filter((arg) => arg.id !== id));
+
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>나의 메모장</Text>
@@ -68,6 +81,7 @@ export default function HomeScreen() {
         renderItem={({ item }) => (
           <View style={styles.memoItem}>
             <Text>{item.content}</Text>
+            <Button onPress={() => runConfirm(item)}>x</Button>
           </View>
         )}
         ListEmptyComponent={
@@ -119,5 +133,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 8,
     marginBottom: 10,
+    display: 'flex',
+    justifyContent : 'space-between',
+    flexDirection : 'row',
+    alignItems : 'center'
   },
 });
