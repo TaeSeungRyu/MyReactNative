@@ -82,6 +82,16 @@ export default function HomeScreen() {
           <View style={styles.memoItem}>
             <Text>{item.content}</Text>
             <Button onPress={() => runConfirm(item)}>x</Button>
+            <Pressable
+              onPress={() => runConfirm(item)}
+              style={{
+                backgroundColor: '#ef4444',
+                padding: 10,
+                borderRadius: 8,
+              }}
+            >
+              <Text style={{ color: '#fff' }}>삭제</Text>
+            </Pressable>            
           </View>
         )}
         ListEmptyComponent={
