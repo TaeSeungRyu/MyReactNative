@@ -1,4 +1,5 @@
 
+import MemoItem from '@/components/MemoItem';
 import * as Haptics from 'expo-haptics';
 import { useEffect, useState } from 'react';
 import {
@@ -17,6 +18,7 @@ import {
 type Memo = {
   id: number;
   content: string;
+  isEdit: boolean;
 };
 
 export default function HomeScreen() {
@@ -25,9 +27,9 @@ export default function HomeScreen() {
 
   // 메모 목록
   const [memos, setMemos] = useState<Memo[]>([
-    { id: 1, content: 'React Native 공부하기' },
-    { id: 2, content: 'FlatList 이해하기' },
-    { id: 3, content: '메모 앱 만들기' },
+    { id: 1, content: 'React Native 공부하기', isEdit: false },
+    { id: 2, content: 'FlatList 이해하기', isEdit: false },
+    { id: 3, content: '메모 앱 만들기', isEdit: false },
   ]);
 
   // 메모 추가
@@ -37,6 +39,7 @@ export default function HomeScreen() {
     const newMemo: Memo = {
       id: Date.now(),
       content: memo.trim(),
+      isEdit: false
     };
 
     // 기존 목록에 새 메모 추가
@@ -82,6 +85,31 @@ export default function HomeScreen() {
       },
     ]);
   };
+
+
+  // 메모 수정 모드 전환
+  const handleEdit = (id: number) => {
+    setMemos((prev) =>
+      prev.map((item) =>
+        item.id === id
+          ? { ...item, isEdit: !item.isEdit }
+          : item
+      )
+    );
+  };
+
+  // 메모 내용 수정
+  const handleChangeContent = (id: number, content: string) => {
+    setMemos((prev) =>
+      prev.map((item) =>
+        item.id === id
+          ? { ...item, content }
+          : item
+      )
+    );
+  };
+
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>나의 메모장</Text>
@@ -106,7 +134,16 @@ export default function HomeScreen() {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={styles.memoItem}>
-            <Text>{item.content}</Text>
+
+            {/* 메모 내용 또는 수정 입력창 */}
+            <MemoItem
+              id={item.id}
+              content={item.content}
+              isEdit={item.isEdit}
+              onChangeContent={handleChangeContent}
+            />
+
+            {/* 삭제 버튼 */}
             <Pressable
               onPress={() => runConfirm(item)}
               style={{
@@ -117,6 +154,22 @@ export default function HomeScreen() {
             >
               <Text style={{ color: '#fff' }}>삭제</Text>
             </Pressable>
+
+            {/* 수정 / 저장 버튼 */}
+            <Pressable
+              onPress={() => handleEdit(item.id)}
+              style={{
+                backgroundColor: '#446cef',
+                padding: 10,
+                borderRadius: 8,
+                marginLeft: 5,
+              }}
+            >
+              <Text style={{ color: '#fff' }}>
+                {item.isEdit ? '저장' : '변경'}
+              </Text>
+            </Pressable>
+
           </View>
         )}
         ListEmptyComponent={
