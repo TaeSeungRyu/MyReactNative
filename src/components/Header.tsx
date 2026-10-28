@@ -10,7 +10,7 @@ export default function Header({ pathName }: HeaderProps) {
     const pathname = usePathname();
 
     // 화면 이동
-    const movePage = (path: '/' | '/board') => {
+    const movePage = (path: '/' | '/board' | '/2depth') => {
         router.navigate(path);
     };
 
@@ -38,6 +38,15 @@ export default function Header({ pathName }: HeaderProps) {
                 >
                     <Text style={styles.text}>Board</Text>
                 </Pressable>
+                <Pressable
+                    onPress={() => movePage('/2depth')}
+                    style={[
+                        styles.menu,
+                        pathname === '/2depth' && styles.activeMenu,
+                    ]}
+                >
+                    <Text style={styles.text}>HTTP</Text>
+                </Pressable>                
             </View>
         </>
     );
