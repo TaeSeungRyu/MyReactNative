@@ -1,4 +1,5 @@
 
+import LoadingTest from '@/components/LoadingTest';
 import {
     StyleSheet,
     Text,
@@ -10,6 +11,7 @@ export default function HomeScreen() {
     return (
         <View style={styles.container}>
             <Text>board...</Text>
+            <LoadingTest></LoadingTest>
         </View>
     );
 }
