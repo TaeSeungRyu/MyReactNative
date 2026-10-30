@@ -1,4 +1,5 @@
 import Header from '@/components/Header';
+import useAppLifecycle from '@/hooks/use-app-lifecycle';
 import { Slot, usePathname } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useState } from 'react';
@@ -34,6 +35,9 @@ export default function RootLayout() {
       SplashScreen.hideAsync();
     }
   }, [isReady]);
+
+  /////앱 상태
+  useAppLifecycle()
 
   return <>
     <Header pathName={currentPath}></Header>
