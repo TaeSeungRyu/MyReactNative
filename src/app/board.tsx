@@ -1,4 +1,5 @@
 import LoadingTest from '@/components/LoadingTest';
+import BackHandlerTest from '@/constants/BackHandlerTest';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
 
@@ -130,6 +131,7 @@ export default function HomeScreen() {
             )}
 
             <LoadingTest />
+            <BackHandlerTest />
         </View>
     );
 }
