@@ -1,4 +1,6 @@
+import KeyboardTest from '@/components/KeyboardTest';
 import LoadingTest from '@/components/LoadingTest';
+import NetInfoTest from '@/components/NetInfoTest';
 import BackHandlerTest from '@/constants/BackHandlerTest';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
@@ -132,6 +134,8 @@ export default function HomeScreen() {
 
             <LoadingTest />
             <BackHandlerTest />
+            <KeyboardTest />
+            <NetInfoTest />
         </View>
     );
 }
