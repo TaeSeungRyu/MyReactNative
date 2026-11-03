@@ -2,6 +2,7 @@ import BatteryTest from '@/components/BatteryTest';
 import KeyboardTest from '@/components/KeyboardTest';
 import LoadingTest from '@/components/LoadingTest';
 import NetInfoTest from '@/components/NetInfoTest';
+import VibrationTest from '@/components/VibrationTest';
 import BackHandlerTest from '@/constants/BackHandlerTest';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
@@ -138,6 +139,7 @@ export default function HomeScreen() {
             <KeyboardTest />
             <NetInfoTest />
             <BatteryTest />
+            <VibrationTest />
         </View>
     );
 }
