@@ -1,3 +1,4 @@
+import BatteryTest from '@/components/BatteryTest';
 import KeyboardTest from '@/components/KeyboardTest';
 import LoadingTest from '@/components/LoadingTest';
 import NetInfoTest from '@/components/NetInfoTest';
@@ -136,6 +137,7 @@ export default function HomeScreen() {
             <BackHandlerTest />
             <KeyboardTest />
             <NetInfoTest />
+            <BatteryTest />
         </View>
     );
 }
