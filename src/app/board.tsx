@@ -1,7 +1,5 @@
-import KeyboardTest from '@/components/KeyboardTest';
-import LoadingTest from '@/components/LoadingTest';
-import PermissionTest from '@/components/PermissionTest';
-import BackHandlerTest from '@/constants/BackHandlerTest';
+import NotificationTest from '@/components/NotificationTest';
+import ShareTest from '@/components/ShareTest';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
 
@@ -132,13 +130,17 @@ export default function HomeScreen() {
                 />
             )}
 
+
+            {/* 
             <LoadingTest />
             <BackHandlerTest />
-            <KeyboardTest />
-            {/* <NetInfoTest />
+            <KeyboardTest />            
+            <NetInfoTest />
             <BatteryTest />
-            <VibrationTest /> */}
-            <PermissionTest />
+            <VibrationTest /> <PermissionTest />*/}
+            
+            <ShareTest />
+            <NotificationTest />
         </View>
     );
 }
