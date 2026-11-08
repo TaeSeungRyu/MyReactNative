@@ -1,4 +1,5 @@
 import Header from '@/components/Header';
+import useNotificationNavigation from '@/components/useNotificationNavigation';
 import useAppLifecycle from '@/hooks/use-app-lifecycle';
 import { Slot, usePathname } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -38,6 +39,10 @@ export default function RootLayout() {
 
   /////앱 상태
   useAppLifecycle()
+
+
+  //노티의 값을 감지해 클리할 때 라우팅 처리.
+  useNotificationNavigation()
 
   return <>
     <Header pathName={currentPath}></Header>

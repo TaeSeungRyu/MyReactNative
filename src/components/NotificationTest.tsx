@@ -59,9 +59,11 @@ useEffect(() => {
             // 4. 5초 후 로컬 알림 예약
             await Notifications.scheduleNotificationAsync({
                 content: {
-                    title: 'React Native 테스트',
-                    body: '5초가 지나서 알림이 도착했습니다!',
-                    sound: 'default',
+                    title: '새로운 게시글',
+                    body: '게시글을 확인해 보세요!',
+                    data: {
+                        screen: '/board',
+                    },
                 },
                 trigger: {
                     type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
