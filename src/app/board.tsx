@@ -1,3 +1,4 @@
+import DeepLinkTest from '@/components/DeepLinkTest';
 import NotificationTest from '@/components/NotificationTest';
 import ShareTest from '@/components/ShareTest';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -138,7 +139,7 @@ export default function HomeScreen() {
             <NetInfoTest />
             <BatteryTest />
             <VibrationTest /> <PermissionTest />*/}
-            
+            <DeepLinkTest></DeepLinkTest>
             <ShareTest />
             <NotificationTest />
         </View>
