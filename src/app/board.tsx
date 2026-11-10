@@ -139,7 +139,7 @@ export default function HomeScreen() {
             <NetInfoTest />
             <BatteryTest />
             <VibrationTest /> <PermissionTest />*/}
-            <DeepLinkTest></DeepLinkTest>
+            <DeepLinkTest/>
             <ShareTest />
             <NotificationTest />
         </View>
