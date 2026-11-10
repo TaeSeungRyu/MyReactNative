@@ -1,22 +1,30 @@
-import Constants from 'expo-constants';
+import Constants, { ExecutionEnvironment } from 'expo-constants';
 import { Button, Linking, View } from 'react-native';
 
 export default function DeepLinkTest() {
+
     const openBoard = async () => {
-        const baseUrl = Constants.expoConfig?.hostUri;
+        let url: string;
 
-        if (!baseUrl) {
-            console.log('Expo 개발 서버 주소를 찾을 수 없습니다.');
-            return;
+        // Expo Go 환경
+        if (
+            Constants.executionEnvironment ===
+            ExecutionEnvironment.StoreClient
+        ) {
+            const hostUri = Constants.expoConfig?.hostUri;
+            if (!hostUri) {
+                console.log('Expo 서버 주소가 없습니다.');
+                return;
+            }
+            url = `exp://${hostUri}/--/board`;
         }
-
-        const url = `exp://${baseUrl}/--/deepLink`;
-
-        console.log('딥링크:', url);
-
+        // Development Build 또는 배포 앱
+        else {
+            url = 'myapp://board';
+        }
+        console.log('실행 URL:', url);
         await Linking.openURL(url);
     };
-
     return (
         <View style={{ padding: 20 }}>
             <Button
