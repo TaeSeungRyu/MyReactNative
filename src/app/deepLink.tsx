@@ -1,3 +1,4 @@
+import ApiTest from '@/components/ApiTest';
 import ImagePickerTest from '@/components/ImagePickerTest';
 import SecureStoreTest from '@/components/SecureStoreTest';
 import { Text, View } from 'react-native';
@@ -8,6 +9,7 @@ export default function DeepLinkScreen() {
             <Text>딥링크로 화면에 도착했습니다!</Text>
              <ImagePickerTest />
              <SecureStoreTest/>
+             <ApiTest/>
         </View>
     );
 }
