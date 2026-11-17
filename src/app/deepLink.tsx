@@ -1,5 +1,6 @@
 import ApiTest from '@/components/ApiTest';
 import ImagePickerTest from '@/components/ImagePickerTest';
+import RefreshTokenTest from '@/components/RefreshTokenTest';
 import SecureStoreTest from '@/components/SecureStoreTest';
 import { Text, View } from 'react-native';
 
@@ -10,6 +11,7 @@ export default function DeepLinkScreen() {
              <ImagePickerTest />
              <SecureStoreTest/>
              <ApiTest/>
+             <RefreshTokenTest/>
         </View>
     );
 }
