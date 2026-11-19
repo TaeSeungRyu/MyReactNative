@@ -19,6 +19,7 @@
       },
       "predictiveBackGestureEnabled": false,
       "permissions": [
+        "android.permission.VIBRATE",
         "android.permission.VIBRATE"
       ],
       "package": "com.anonymous.myReactNative"
@@ -61,6 +62,12 @@
       "eas": {
         "projectId": "02464df0-7bf7-45ae-a3a0-9244231a5156"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/02464df0-7bf7-45ae-a3a0-9244231a5156"
     }
   }
 }
